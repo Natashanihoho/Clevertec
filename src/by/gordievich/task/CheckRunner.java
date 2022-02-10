@@ -1,7 +1,7 @@
 package by.gordievich.task;
 
 import by.gordievich.task.entity.Basket;
-import by.gordievich.task.service.Calculation;
+import by.gordievich.task.service.Handling;
 
 
 public class CheckRunner {
@@ -14,12 +14,11 @@ public class CheckRunner {
             String[] separArgs = args[i].split("-");
             int id = Integer.parseInt(separArgs[0]);
             int number = Integer.parseInt(separArgs[1]);
-            basket.putProductsInBasket(id, number);
+            basket.putPositionsInBasket(id, number);
         }
 
-        Calculation calculation = new Calculation(basket);
-        calculation.fillReceipt();
-        System.out.println(calculation.getReceipt());
+        Handling handling = new Handling(basket);
+        System.out.println(handling.getReceipt());
 
     }
 
