@@ -1,8 +1,8 @@
 package by.gordievich.task.entity;
 
 public class Product {
-    private int id;
-    private String description;
+    private final int id;
+    private final String description;
     private double price;
     private int availableNumber;
     private boolean isDiscount;
@@ -40,8 +40,4 @@ public class Product {
         this.availableNumber = availableNumber;
     }
 
-  /*  @Override
-    public String toString() {
-        return String.format("%-4d %-13s %-7.2f %-8d %-6.2f", getId(), getDescription(), getPrice(), number, total);
-    }*/
 }
