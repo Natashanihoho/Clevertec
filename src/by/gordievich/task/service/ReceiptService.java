@@ -10,6 +10,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public class ReceiptService implements CustomerService {
@@ -43,6 +44,11 @@ public class ReceiptService implements CustomerService {
         int requiredNumber;
 
         for (String pair : argsLine) {
+            if(pair.contains("card")) {
+                discountCard = DiscountCard.getDiscountByCard(pair);
+                System.out.println(discountCard.name());
+                break;
+            }
             String[] arg = pair.split("-");
             id = Integer.parseInt(arg[0]);
             requiredNumber = Integer.parseInt(arg[1]);
@@ -67,14 +73,29 @@ public class ReceiptService implements CustomerService {
                     stringBuilder.append(StringFormatter.DISCOUNT_FIELD.formatted(product.getId(), product.getDescription(), product.getPrice(),
                             position.getRequiredNumber(), fullPrice, position.getTotal() - fullPrice, position.getTotal()));
                 } else{
+                    if(discountCard == DiscountCard.CARD_NOT_DEFINED) {
+                        position.setTotal(fullPrice);
+                        stringBuilder.append(StringFormatter.NORMAL_FIELD.formatted(product.getId(), product.getDescription(), product.getPrice(),
+                                position.getRequiredNumber(), position.getTotal()));
+                    } else{
+                        position.setDiscount(discountCard.getDiscount());
+                        position.setTotal(fullPrice * (1 - discountCard.getDiscount() / 100.));
+                        stringBuilder.append(StringFormatter.DISCOUNT_FIELD.formatted(product.getId(), product.getDescription(), product.getPrice(),
+                                position.getRequiredNumber(), fullPrice, position.getTotal() - fullPrice, position.getTotal()));
+                    }
+
+                }
+            } else {
+                if(discountCard == DiscountCard.CARD_NOT_DEFINED) {
                     position.setTotal(fullPrice);
                     stringBuilder.append(StringFormatter.NORMAL_FIELD.formatted(product.getId(), product.getDescription(), product.getPrice(),
                             position.getRequiredNumber(), position.getTotal()));
+                } else{
+                    position.setDiscount(discountCard.getDiscount());
+                    position.setTotal(fullPrice * (1 - discountCard.getDiscount() / 100.));
+                    stringBuilder.append(StringFormatter.DISCOUNT_FIELD.formatted(product.getId(), product.getDescription(), product.getPrice(),
+                            position.getRequiredNumber(), fullPrice, position.getTotal() - fullPrice, position.getTotal()));
                 }
-            } else {
-                position.setTotal(fullPrice);
-                stringBuilder.append(StringFormatter.NORMAL_FIELD.formatted(product.getId(), product.getDescription(), product.getPrice(),
-                        position.getRequiredNumber(), position.getTotal()));
             }
         }
     }

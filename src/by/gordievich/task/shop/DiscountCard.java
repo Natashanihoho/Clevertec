@@ -1,6 +1,7 @@
 package by.gordievich.task.shop;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 public enum DiscountCard {
     CARD_NOT_DEFINED(0),
@@ -20,9 +21,9 @@ public enum DiscountCard {
         this.discount = discount;
     }
 
-    public DiscountCard getDiscountByCard(String name) {
+    public static DiscountCard getDiscountByCard(String name) {
         return Arrays.stream(DiscountCard.values())
-                .filter(x -> x.name().equals(name))
+                .filter(x -> x.name().equals(name.toUpperCase()))
                 .findFirst()
                 .orElse(CARD_NOT_DEFINED);
     }
