@@ -1,19 +1,21 @@
 package by.gordievich.task.entity;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     private final int id;
     private final String description;
     private double price;
     private int availableNumber;
-    private boolean isDiscount;
+    private boolean isSpecialOffer;
 
 
-    public Product(int id, String description, double price, int availableNumber, boolean isDiscount) {
+    public Product(int id, String description, double price, int availableNumber, boolean isSpecialOffer) {
         this.id = id;
         this.description = description;
         this.price = price;
         this.availableNumber = availableNumber;
-        this.isDiscount = isDiscount;
+        this.isSpecialOffer = isSpecialOffer;
     }
 
     public int getId() {
@@ -28,8 +30,8 @@ public class Product {
         return price;
     }
 
-    public boolean isDiscount() {
-        return isDiscount;
+    public boolean isSpecialOffer() {
+        return isSpecialOffer;
     }
 
     public int getAvailableNumber() {

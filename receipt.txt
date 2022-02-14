@@ -1,0 +1,26 @@
+              CASH RECEIPT
+
+         SUPERMARKET "LOLLIPOP"
+  17100 Collins Ave Sunny Isles Beach,
+                FL 33160
+          Tel: 37529-234-6375
+
+Cashier: Liam Neeson     DATE: 2022-02-14
+                         TIME: 14:45:30
+-----------------------------------------
+ID | DESCRIPTION | PRICE | NUMBER | TOTAL
+-----------------------------------------
+1    Lollipop      0,87    4        3,48  
+                          discount -0,03
+3    Ice cream     2,50    6        15,00 
+                          discount -0,15
+11   Waffle        2,63    8        21,04 
+                          discount -2,10
+18   Lemonade      1,62    1        1,62  
+                          discount -0,02
+-----------------------------------------
+-----------------------------------------
+Discount                            -2,30
+                                  -------
+TO PAY                              38,84
+             ---THANK YOU!---

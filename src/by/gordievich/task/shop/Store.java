@@ -1,6 +1,7 @@
 package by.gordievich.task.shop;
 
 import by.gordievich.task.entity.Product;
+import by.gordievich.task.exceptions.UnknownIdException;
 
 import java.util.Arrays;
 import java.util.List;

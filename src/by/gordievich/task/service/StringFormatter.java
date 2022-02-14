@@ -22,14 +22,12 @@ public final class StringFormatter {
 
     public static final String DISCOUNT_FIELD = """
             %-4d %-13s %-7.2f %-8d %-6.2f
-            %40.2f
-            %41.2f
+                                      discount %.2f
             """;
 
     public static final String COMPLETION = """
             -----------------------------------------
             -----------------------------------------
-            Total%36.2f
             Discount%33.2f
                                               -------
             TO PAY%35.2f

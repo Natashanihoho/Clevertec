@@ -4,18 +4,18 @@ public class Position {
     private Product product;
     private int requiredNumber;
     private double total;
-    private int discount;
+    private double discount = 0;
 
     public Position(Product product, int requiredNumber) {
         this.product = product;
         this.requiredNumber = requiredNumber;
     }
 
-    public int getDiscount() {
+    public double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(int discount) {
+    public void setDiscount(double discount) {
         this.discount = discount;
     }
 
