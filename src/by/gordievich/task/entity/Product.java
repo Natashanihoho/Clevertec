@@ -1,8 +1,7 @@
 package by.gordievich.task.entity;
 
-import java.io.Serializable;
+public class Product {
 
-public class Product implements Serializable {
     private final int id;
     private final String description;
     private double price;

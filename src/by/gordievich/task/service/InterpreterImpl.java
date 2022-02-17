@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Random;
 
 public class InterpreterImpl implements Interpreter {
+
     private final Store store = Store.getInstance();
     private final int discountPercentForFive = 10;
     private List<Position> positions = new ArrayList<>();
@@ -21,7 +22,7 @@ public class InterpreterImpl implements Interpreter {
     private DiscountCard discountCard = DiscountCard.CARD_NOT_DEFINED;
 
     @Override
-    public String interpret(String[] args){
+    public String interpret(String[] args) throws UnknownIdException {
         buildReceiptTitle(store.getCashiers());
         addPositionsToList(args);
         calculateEachPosition();
@@ -36,8 +37,8 @@ public class InterpreterImpl implements Interpreter {
         stringBuilder.append(StringFormatter.TITLE.formatted(randomCashier, currentDate, currentTime));
     }
 
-    private void addPositionsToList(String[] argsLine){
-        Product product;
+    private void addPositionsToList(String[] argsLine) throws UnknownIdException {
+        Product product = null;
         int id;
         int requiredNumber;
 
@@ -50,6 +51,7 @@ public class InterpreterImpl implements Interpreter {
             id = Integer.parseInt(arg[0]);
             requiredNumber = Integer.parseInt(arg[1]);
             product = store.getProduct(id, requiredNumber);
+
             if (product != null) {
                 positions.add(new Position(product, requiredNumber));
             }

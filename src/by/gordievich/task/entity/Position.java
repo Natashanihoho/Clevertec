@@ -1,6 +1,7 @@
 package by.gordievich.task.entity;
 
 public class Position {
+
     private Product product;
     private int requiredNumber;
     private double total;

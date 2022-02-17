@@ -1,9 +1,9 @@
 package by.gordievich.task.shop;
 
 import java.util.Arrays;
-import java.util.Locale;
 
 public enum DiscountCard {
+
     CARD_NOT_DEFINED(0),
     CARD1(1),
     CARD2(2),
@@ -31,4 +31,5 @@ public enum DiscountCard {
     public int getDiscount() {
         return discount;
     }
+
 }
