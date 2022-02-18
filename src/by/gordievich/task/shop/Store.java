@@ -1,6 +1,7 @@
 package by.gordievich.task.shop;
 
 import by.gordievich.task.entity.Product;
+import by.gordievich.task.exceptions.NotEnoughProductsException;
 import by.gordievich.task.exceptions.UnknownIdException;
 
 import java.util.List;
@@ -30,15 +31,13 @@ public class Store {
         return instance;
     }
 
-    public Product getProduct(int id, int requiredNumber) throws UnknownIdException {
+    public Product getProduct(int id, int requiredNumber) throws UnknownIdException, NotEnoughProductsException {
         Product product = stockProducts.stream()
                 .filter(x -> x.getId() == id)
                 .findFirst()
-                .orElseGet(null);
-        if (product == null) {
-                throw new UnknownIdException("Product isn't found");
-        }
-        if (product.getAvailableNumber() < requiredNumber) return null;
+                .orElseThrow(() -> new UnknownIdException("Product is not found"));
+
+        if (product.getAvailableNumber() < requiredNumber) throw new NotEnoughProductsException("There are not enough products");
         product.setAvailableNumber(product.getAvailableNumber() - requiredNumber);
         return product;
     }

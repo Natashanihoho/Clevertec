@@ -9,14 +9,13 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class StoreFactory {
 
     private StoreFactory() { }
 
-    public static Store consoleStore() {
+    public static Store defaultStore() {
         List<Product> stockProducts = Arrays.asList(
                 new Product(1, "Lollipop", 0.87, 20, false),
                 new Product(2, "Popcorn", 2.10, 20, true),
@@ -45,23 +44,22 @@ public final class StoreFactory {
 
     public static Store fileStore(String path) throws IOException {
         Store store = Store.getInstance();
-        List<String> collect;
         List<Product> stockProducts = new ArrayList<>();
 
         try(Stream<String> lines = Files.lines(Path.of(path))) {
-            collect = lines.collect(Collectors.toList());
+            lines.forEach(line -> {
+                String[] params = line.split("-");
+                int id = Integer.parseInt(params[0].trim());
+                String description = params[1].trim();
+                double price = Double.parseDouble(params[2].trim());
+                int number = Integer.parseInt(params[3].trim());
+                boolean isSpecialOffer = Boolean.parseBoolean(params[4].trim());
+                stockProducts.add(new Product(id, description, price, number, isSpecialOffer));
+            });
         }
 
-        for (String line: collect) {
-            String[] params = line.split("-");
-            int id = Integer.parseInt(params[0].trim());
-            String description = params[1].trim();
-            double price = Double.parseDouble(params[2].trim());
-            int number = Integer.parseInt(params[3].trim());
-            boolean isSpecialOffer = Boolean.parseBoolean(params[4].trim());
-            stockProducts.add(new Product(id, description, price, number, isSpecialOffer));
-        }
         store.loadProducts(stockProducts);
+
         return store;
     }
 

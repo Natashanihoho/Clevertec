@@ -1,8 +1,9 @@
 package by.gordievich.task.service;
 
+import by.gordievich.task.exceptions.NotEnoughProductsException;
 import by.gordievich.task.exceptions.UnknownIdException;
 
 public interface Interpreter {
 
-    String interpret(String[] args) throws UnknownIdException;
+    String interpret(String[] args) throws UnknownIdException, NotEnoughProductsException;
 }
